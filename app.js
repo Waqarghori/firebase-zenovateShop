@@ -15,22 +15,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-let signOutbtn = document.getElementById('logoutBtn')
-if (signOut) {
-    signOut.addEventListener('click',()=>{
-        signOut(auth).then(() => {
-            console.log('log out');
-            
-            window.location.href = 'index.html'
-}).catch((error) => {
-  // An error happened.
-  console.log('error');
-  
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = 'home.html'
+  } else {
+    window.location.href = 'index.html'
+  }
 });
 
-    })
-    
-}
 
 
 window.addEventListener('DOMContentLoaded', () => {
