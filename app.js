@@ -12,34 +12,17 @@ const firebaseConfig = {
     measurementId: "G-PWB0YS3TYJ"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    window.location.href = 'home.html'
-  } else {
-    window.location.href = 'index.html'
-  }
-});
-
-
-
-window.addEventListener('DOMContentLoaded', () => {
-  const logoutBtn = document.getElementById('logoutBtn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      signOut(auth)
-        .then(() => {
-          console.log("🚪 Logged out successfully");
-          window.location.href = "index.html";
-        })
-        .catch((error) => {
-          console.log("❌ Logout error:", error.message);
-        });
-    });
-  }
-});
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     window.location.href = 'home.html'
+//     const uid = user.uid;
+//   } else {
+//     window.location.href = 'index.html'
+//   }
+// });
 
 
 let sbtn = document.getElementById('sBtn')
@@ -75,6 +58,7 @@ if (lBtn) {
   .then((userCredential) => {
     const user = userCredential.user;
     console.log(`${user.email} is logIn Succecfully`);
+    window.location.href = 'home.html'
     document.getElementById('lEmail').value = '';
     document.getElementById('lPass').value = '';
   })
@@ -86,3 +70,15 @@ if (lBtn) {
     })
 }
 
+
+let signOutBtn = document.getElementById('signOut');
+if (signOutBtn) {
+  signOutBtn.addEventListener('click',()=>{
+    signOut(auth).then(() => {
+      window.location.href = 'index.html'
+}).catch((error) => {
+console.log('error');
+
+});
+  })
+}
