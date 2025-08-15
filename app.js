@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import { getFirestore,collection, addDoc, getDocs  } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { getFirestore,collection, addDoc, getDocs,doc, deleteDoc  } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDZu7jkvsUjy5_-LVH03x0xqOBvHOmsP1k",
@@ -183,3 +183,11 @@ querySnapshot.forEach( (doc) => {
 }
 
 adminRead()
+
+async function deleteProduct(e){
+
+  await deleteDoc(doc(db, "product", e));
+  
+}
+
+window.deleteProduct = deleteProduct
